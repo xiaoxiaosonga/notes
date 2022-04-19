@@ -205,6 +205,7 @@ sh bin/mqshutdown broker
 - 缺点：单台机器宕机期间，这台机器上未被消费的消息在机器恢复之前不可订阅，消息实时性会受到影响。
 
 #### 3）多Master多Slave模式（异步）
+master先应答消息发送者，然后再将消息同步到slave
 
 每个Master配置一个Slave，有多对Master-Slave，HA采用异步复制方式，主备有短暂消息延迟（毫秒级），这种模式的优缺点如下：
 
@@ -212,6 +213,7 @@ sh bin/mqshutdown broker
 - 缺点：Master宕机，磁盘损坏情况下会丢失少量消息。
 
 #### 4）多Master多Slave模式（同步）
+master先将消息同步到slave，然后再应答消息发送者
 
 每个Master配置一个Slave，有多对Master-Slave，HA采用同步双写方式，即只有主备都写成功，才向应用返回成功，这种模式的优缺点如下：
 
