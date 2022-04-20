@@ -671,6 +671,7 @@ master1：
 ```bash
 cd /usr/local/rocketmq/bin
 nohup sh mqbroker -c /usr/local/rocketmq/conf/2m-2s-syncbroker-a.properties &
+nohup sh mqbroker -c /opt/rocketmq-all-4.5.1-bin-release/conf/2m-2s-sync/broker-a.properties &
 ```
 
 slave2：
