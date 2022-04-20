@@ -266,6 +266,7 @@ vim /etc/hosts
 
 ```bash
 systemctl restart network
+service network-manager restart
 ```
 
 ### 3.3.5 防火墙配置
