@@ -323,6 +323,7 @@ public class MessageListenerImpl implements MessageListener {
 ## 1.6 消费幂等
 
 消息队列 RocketMQ 消费者在接收到消息以后，有必要根据业务上的唯一 Key 对消息做幂等处理的必要性。
+消费者消费相同的消息后不会受到影响。
 
 ### 1.6.1 消费幂等的必要性
 
@@ -356,7 +357,8 @@ SendResult sendResult = producer.send(message);
 consumer.subscribe("ons_test", "*", new MessageListener() {
     public Action consume(Message message, ConsumeContext context) {
         String key = message.getKey()
-        // 根据业务唯一标识的 key 做幂等处理
+        // 根据业务唯一标识的 key 做幂等处理，可以将消费过的消息保存到数据库，且这些消息都被设置过属性key，每次消费新的消息时，取出消息的key于数据库中的记录比较
+	//如有相同的记录，则舍弃该新消息，不消费
     }
 });
 ```
